@@ -1,0 +1,46 @@
+name: Moosecli Build
+
+on: [push]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install poetry
+      - name: Invoke pylint with all dependencies
+        run: |
+          poetry install
+          poetry run pylint --disable=C0303,C0114,W1203,W0703,W0511,R1710,W0105,C0415,C0103 moosecli/
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install poetry
+      - name: Build pex file
+        run: |
+          pip install pex
+          ./build-pex.sh
+      # Reference: https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      - name: Write Github Run ID to env
+        run: echo "GH_RUN_ID=${GITHUB_RUN_ID}" >> $GITHUB_ENV
+
+      # Reference: https://github.com/actions/upload-artifact
+      - name: Archive Build Artifacts from CI Pipeline
+        uses: actions/upload-artifact@v3
+        with:
+          name: "moosecli-${{ env.GH_RUN_ID }}"
+          path: |
+            dist/*

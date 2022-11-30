@@ -1,0 +1,39 @@
+[project]
+name = "moosecli"
+version = "0.1.0"
+description = "A project template & place to experiment with CLI building."
+
+[tool.poetry]
+name = "moosecli"
+version = "0.1.0"
+description = "A project template & place to experiment with CLI building."
+authors = ["b-long <b-long@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+typer = "^0.7.0"
+
+[tool.poetry.dev-dependencies]
+
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.15.7"
+
+[tool.setuptools]
+# By default, include-package-data is true in pyproject.toml, so you do
+# NOT have to specify this line.
+include-package-data = true
+
+
+[tool.setuptools.packages.find]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["moosecli"]  # package names should match these glob patterns (["*"] by default)
+exclude = ["tests/"]  # exclude packages matching these glob patterns (empty by default)
+namespaces = true  # to disable scanning PEP 420 namespaces (true by default)
+
+[tool.setuptools.package-data]
+moosecli = ["data/*.md", "data/*.txt"]
+
+[build-system]
+requires = ["poetry-core", "setuptools"]
+build-backend = "setuptools.build_meta"
