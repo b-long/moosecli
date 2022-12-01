@@ -20,6 +20,6 @@ poetry export -f requirements.txt --without-hashes --output requirements.txt
 
 echo "Requirements exported..."
 
-pex . --requirement=requirements.txt -o dist/portable_cli -e moosecli
+pex . --requirement=requirements.txt --python-shebang="#!/usr/bin/env python3" -o dist/portable_cli -e moosecli
 
 echo "Build complete."
