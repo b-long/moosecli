@@ -18,6 +18,8 @@ typer = "^0.7.0"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^2.15.7"
+nox = "^2022.11.21"
+black = {version = "^22.10.0", allow-prereleases = true}
 
 [tool.setuptools]
 # By default, include-package-data is true in pyproject.toml, so you do
