@@ -13,9 +13,6 @@ authors = ["b-long <b-long@users.noreply.github.com>"]
 python = ">=3.8,<3.12"
 typer = "^0.7.0"
 
-[tool.poetry.dev-dependencies]
-
-
 [tool.poetry.group.dev.dependencies]
 pylint = "^2.15.7"
 nox = "^2022.11.21"
