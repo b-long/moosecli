@@ -154,6 +154,8 @@ def pin_for_pyoxidizer(session: nox.Session) -> None:
     """
     session.install("pip-tools>=6.8.0")
 
+    Path(f"requirements/pyoxidizer-{sys.platform}.txt").touch()
+
     session.run(
         "pip-compile",
         "--index-url",
