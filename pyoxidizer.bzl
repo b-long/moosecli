@@ -16,7 +16,7 @@ def make_exe():
     python_config = dist.make_python_interpreter_config()
 
     # Evaluate a string as Python code when the interpreter starts.
-    python_config.run_command = "from moosecli.__main__ import main; main()"
+    python_config.run_command = "from moosecli.__main__ import app; app()"
 
     # Produce a PythonExecutable from a Python distribution, embedded
     # resources, and other options. The returned object represents the
@@ -29,8 +29,8 @@ def make_exe():
 
     # Install pinned dependencies, then ourselves.
     # FIXME: Investigate the trick Hynek used here:
-    # exe.add_python_resources(exe.pip_install(["-r", "requirements/pyoxidizer-%s.txt" % VARS["platform"]]))
-    exe.add_python_resources(exe.pip_install(["-r", "requirements.txt"]))
+    exe.add_python_resources(exe.pip_install(["-r", "requirements/pyoxidizer-%s.txt" % VARS["platform"]]))
+    # exe.add_python_resources(exe.pip_install(["-r", "requirements.txt"]))
     exe.add_python_resources(exe.pip_install(["."]))
 
     return exe
