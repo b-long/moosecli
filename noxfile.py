@@ -9,16 +9,18 @@ from pathlib import Path
 import nox
 
 
-DEFAULT_PYTHON = "3.11"
+# DEFAULT_PYTHON = "3.11"
 
-nox.options.sessions = [
-    "pre_commit",
-    "tests",
-    "docs"
-    # , "mypy"
-]
-nox.options.reuse_existing_virtualenvs = True
-nox.options.error_on_external_run = True
+# nox.options.sessions = [
+#     "pre_commit",
+#     "tests",
+#     "docs"
+#     "oxidize"
+#     # , "mypy"
+# ]
+# nox.options.reuse_existing_virtualenvs = True
+# nox.options.error_on_external_run = True
+# nox.options.error_on_missing_interpreters = True
 
 
 @nox.session
@@ -114,10 +116,10 @@ def update_rtd_versions(session: nox.Session) -> None:
     session.run("python", "docs/update-rtd-versions.py", "doc2dash")
 
 
-@nox.session
+@nox.session(venv_backend="none")
 def oxidize(session: nox.Session) -> None:
     """
-    Build a doc2dash binary with PyOxidizer.
+    Build a moosecli binary with PyOxidizer.
     """
     env = os.environ.copy()
     env["PIP_REQUIRE_VIRTUALENV"] = "0"
@@ -130,9 +132,9 @@ def oxidize(session: nox.Session) -> None:
     else:
         flavor = "standalone"
 
-    session.install("pyoxidizer")
+    session.run("poetry", "install", external=True)
 
-    session.run("pyoxidizer", "-V")
+    session.run("pyoxidizer", "-V", external=True)
     session.run(
         "pyoxidizer",
         "build",
@@ -143,7 +145,8 @@ def oxidize(session: nox.Session) -> None:
         "--var",
         "platform",
         sys.platform,
-        env=env,
+        # env=env,
+        external=True
     )
 
 
@@ -153,6 +156,8 @@ def pin_for_pyoxidizer(session: nox.Session) -> None:
     Pin the Python dependencies that are used for vendoring by PyOxidizer.
     """
     session.install("pip-tools>=6.8.0")
+
+    Path(f"requirements/pyoxidizer-{sys.platform}.txt").touch()
 
     session.run(
         "pip-compile",
