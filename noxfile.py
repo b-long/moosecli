@@ -121,9 +121,9 @@ def oxidize(session: nox.Session) -> None:
     """
     env = os.environ.copy()
     env["PIP_REQUIRE_VIRTUALENV"] = "0"
+    session.run('poetry', '--version', external=True)
 
-    session.run('poetry', 'shell')
-    session.run('poetry', 'install')
+    session.run('poetry', 'install', external=True)
 
     # standalone_static doesn't work on macOS and gives us musl builds on
     # Linux. Since -- unlike on Windows -- you get one binary on both, dynamic
