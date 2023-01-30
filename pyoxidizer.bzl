@@ -29,8 +29,8 @@ def make_exe():
 
     # Install pinned dependencies, then ourselves.
     # FIXME: Investigate the trick Hynek used here:
-    # exe.add_python_resources(exe.pip_install(["-r", "requirements/pyoxidizer-%s.txt" % VARS["platform"]]))
-    exe.add_python_resources(exe.pip_install(["-r", "requirements.txt"]))
+    exe.add_python_resources(exe.pip_install(["-r", "requirements/pyoxidizer-%s.txt" % VARS["platform"]]))
+    # exe.add_python_resources(exe.pip_install(["-r", "requirements.txt"]))
     exe.add_python_resources(exe.pip_install(["."]))
 
     return exe
