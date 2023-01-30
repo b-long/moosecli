@@ -117,10 +117,13 @@ def update_rtd_versions(session: nox.Session) -> None:
 @nox.session
 def oxidize(session: nox.Session) -> None:
     """
-    Build a doc2dash binary with PyOxidizer.
+    Build a moosecli binary with PyOxidizer.
     """
     env = os.environ.copy()
     env["PIP_REQUIRE_VIRTUALENV"] = "0"
+
+    session.run('poetry', 'shell')
+    session.run('poetry', 'install')
 
     # standalone_static doesn't work on macOS and gives us musl builds on
     # Linux. Since -- unlike on Windows -- you get one binary on both, dynamic
