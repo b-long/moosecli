@@ -24,8 +24,8 @@ Dynamic!
 
     print("Content written to a file")
 
-@app.callback()
-def main():
+@app.command()
+def generate_file():
     name: str = typer.prompt(
         "What's your name?",
     )

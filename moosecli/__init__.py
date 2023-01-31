@@ -2,14 +2,12 @@
 __version__ = "0.1.0"
 import sys
 
-import typer
-
-from moosecli.lib import main
+from moosecli.lib import app
 
 from ._package import setup_frozen_package
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()
 
 if getattr(sys, "frozen", False):
     setup_frozen_package()
