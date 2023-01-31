@@ -5,6 +5,7 @@ from pathlib import Path
 
 import typer
 
+app = typer.Typer(help="Welcome to Moose CLI.")
 
 def do_thing_with_package_data(name: str, output_path: Path):
     pkg_resource = "data/something.md"
@@ -23,7 +24,7 @@ Dynamic!
 
     print("Content written to a file")
 
-
+@app.callback()
 def main():
     name: str = typer.prompt(
         "What's your name?",
