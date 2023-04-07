@@ -1,0 +1,67 @@
+name: Moosecli Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install poetry
+      - name: Invoke pylint with all dependencies
+        run: |
+          poetry install
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          pip install poetry
+      - name: Install dependencies
+        run: |
+          poetry config virtualenvs.create false
+          poetry config virtualenvs.prefer-active-python true
+          poetry install
+      - run: |
+          echo "poetry run pip install nuitka"
+          poetry run pip install nuitka
+
+      - name: Build and check binary
+        shell: bash
+        run: |
+          echo "poetry run python -m nuitka --standalone moosecli/__main__.py --output-filename=moosecli.exe"
+          poetry run python -m nuitka --standalone moosecli/__main__.py --output-filename=moosecli
+
+          # cd build/*/release/install/
+          # ./moosecli --help
+        if: runner.os != 'Windows'
+
+      - name: Build and check Windows binary
+        shell: bash
+        run: |          
+          echo "poetry run python -m nuitka --standalone moosecli/__main__.py --output-filename=moosecli.exe"
+          poetry run python -m nuitka --standalone moosecli/__main__.py --output-filename=moosecli.exe
+
+          # cd build/*/release/install/
+          # ./moosecli.exe --help
+        if: runner.os == 'Windows'
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: binaries
+          path: __main__.dist/
