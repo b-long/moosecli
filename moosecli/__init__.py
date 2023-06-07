@@ -1,5 +1,5 @@
 # pylint: disable=missing-module-docstring
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 import sys
 
 from moosecli.lib import app

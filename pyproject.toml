@@ -1,22 +1,22 @@
 [project]
 name = "moosecli"
-version = "0.1.0"
+version = "0.1.1"
 description = "A project template & place to experiment with CLI building."
 
 [tool.poetry]
 name = "moosecli"
-version = "0.1.0"
+version = "0.1.1"
 description = "A project template & place to experiment with CLI building."
 authors = ["b-long <b-long@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
-typer = "^0.7.0"
+typer = "^0.9.0"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^2.15.7"
-nox = "^2022.11.21"
-black = {version = "^22.10.0", allow-prereleases = true}
+pylint = "^2.17"
+nox = "^2023"
+black = {version = "^23"}
 
 [tool.setuptools]
 # By default, include-package-data is true in pyproject.toml, so you do
