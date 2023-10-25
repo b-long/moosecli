@@ -35,8 +35,8 @@ jobs:
           poetry config virtualenvs.prefer-active-python true
           poetry install
       - run: |
-          poetry run pip install pyoxidizer invoke
-          invoke oxidize
+          poetry run pip install pyoxidizer
+          poetry run nox -s oxidize
 
       - name: check binary
         shell: bash
