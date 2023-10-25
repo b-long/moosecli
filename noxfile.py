@@ -160,7 +160,7 @@ def pin_for_pyoxidizer(session: nox.Session) -> None:
     session.run(
         "poetry",
         "export",
-        ">",
+        "-o",
         f"requirements/pyoxidizer-{sys.platform}.txt",
     )
 
