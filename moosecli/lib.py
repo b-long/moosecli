@@ -3,6 +3,8 @@ import os
 import pkgutil
 from pathlib import Path
 
+from cryptography import x509
+
 import typer
 
 app = typer.Typer(help="Welcome to Moose CLI.")
@@ -39,3 +41,10 @@ def generate_file():
     do_thing_with_package_data(name=name, output_path=fname)
 
     print(f"Your custom file has been saved to '{fname}'.")
+
+
+@app.command()
+def show_x509():
+
+    # Welcome the user
+    print(f"{x509}")
