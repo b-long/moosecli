@@ -155,20 +155,13 @@ def pin_for_pyoxidizer(session: nox.Session) -> None:
     """
     Pin the Python dependencies that are used for vendoring by PyOxidizer.
     """
-    session.install("pip-tools>=6.8.0")
-
     Path(f"requirements/pyoxidizer-{sys.platform}.txt").touch()
 
     session.run(
-        "pip-compile",
-        "--index-url",
-        "https://pypi.org/simple",
-        "--generate-hashes",
-        "--resolver",
-        "backtracking",
-        "--output-file",
+        "poetry",
+        "export",
+        ">",
         f"requirements/pyoxidizer-{sys.platform}.txt",
-        "pyproject.toml",
     )
 
 
