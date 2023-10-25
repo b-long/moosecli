@@ -36,6 +36,7 @@ jobs:
           poetry install
       - run: |
           poetry run pip install pyoxidizer
+          poetry run nox -s pin_for_pyoxidizer
           poetry run nox -s oxidize
 
       - name: check binary

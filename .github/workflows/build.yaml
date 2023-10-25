@@ -23,6 +23,7 @@ jobs:
         run: |
           poetry install
           poetry run pylint --disable=C0303,C0114,W1203,W0703,W0511,R1710,W0105,C0415,C0103 moosecli/
+          poetry run pytest tests/
   build-and-upload:
     runs-on: ubuntu-latest
     steps:
