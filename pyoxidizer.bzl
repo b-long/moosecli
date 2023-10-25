@@ -7,8 +7,8 @@ def make_exe():
     dist = default_python_distribution(flavor = VARS["flavor"])
 
     policy = dist.make_python_packaging_policy()
-    # policy.extension_module_filter = "minimal"
-    policy.extension_module_filter = "no-copyleft"
+    policy.extension_module_filter = "minimal"
+    # policy.extension_module_filter = "no-copyleft"
 
     policy.resources_location = "in-memory"
     policy.resources_location_fallback = "filesystem-relative:prefix"
