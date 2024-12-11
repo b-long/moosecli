@@ -26,9 +26,8 @@ be built using the included shell script:
 ```
 The file produced should be fairly small:
 ```bash
-cd dist/
-du -sh portable_cli 
-# 724K    portable_cli
+du -sh dist/portable_cli
+# 18M    dist/portable_cli
 ```
 
 ## Interaction

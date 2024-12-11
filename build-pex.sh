@@ -24,5 +24,5 @@ echo "Building 'scie' PEX build."
 uvx pex . --requirement=requirements.txt --scie eager -o dist/portable_cli --entry-point "moosecli"
 echo "Build complete."
 
-echo "Running tool."
-./dist/portable_cli
+# echo "Running tool."
+# ./dist/portable_cli
