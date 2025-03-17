@@ -35,6 +35,7 @@ du -sh dist/portable_cli
 Once built, copy the file from `dist/portable_cli` to 
 a computer with Python 3.8+ .
 
+<!--
 ## Building binaries
 To build a binary, run:
 ```bash
@@ -46,3 +47,4 @@ Based on:
 * https://github.com/hynek/doc2dash
 * https://hynek.me/til/python-portable-binaries/
 * https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_packaging_python_executable.html
+-->
