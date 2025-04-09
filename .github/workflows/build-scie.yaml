@@ -1,0 +1,42 @@
+---
+# Pex/scie build: https://docs.pex-tool.org/scie.html
+name: Build binaries using scie
+
+on:
+  pull_request:
+  
+jobs:
+  # Static analysis, using "pre-commit"'s official action
+  #
+  # More info:
+  #   https://github.com/pre-commit/action
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - uses: pre-commit/action@v3.0.0
+  # lint-and-test:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the latest version of uv and set the python version to 3.11
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: 3.11
+      - name: Build pex file
+        run: |
+          pip install pex
+          ./build-pex.sh
+      # Reference: https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      - name: Write Github Run ID to env
+        run: echo "GH_RUN_ID=${GITHUB_RUN_ID}" >> $GITHUB_ENV
+
+      # Reference: https://github.com/actions/upload-artifact
+      - name: Archive Build Artifacts from CI Pipeline
+        uses: actions/upload-artifact@v4
+        with:
+          name: "moosecli-${{ env.GH_RUN_ID }}"
+          path: |
+            dist/*

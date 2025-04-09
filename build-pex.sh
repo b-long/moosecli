@@ -11,15 +11,18 @@ echo "Starting build..."
 
 rm -rf dist/portable_cli
 rm -rf ~/.pex/
-# rm -rf .venv/
-# poetry install --no-dev
 
-# Bad because it has moosecli
-# poetry run pip freeze > requirements.txt
-poetry export -f requirements.txt --without-hashes --output requirements.txt
+printf """
+click==8.1.3
+colorama==0.4.6
+typer==0.7.0
+""" > requirements.txt
 
 echo "Requirements exported..."
 
-pex . --requirement=requirements.txt -o dist/portable_cli -e moosecli
-
+echo "Building 'scie' PEX build."
+uvx pex . --requirement=requirements.txt --scie eager -o dist/portable_cli --entry-point "moosecli"
 echo "Build complete."
+
+# echo "Running tool."
+# ./dist/portable_cli

@@ -26,6 +26,9 @@ Dynamic!
 
 @app.command()
 def generate_file():
+    """
+    This command runs as the default of the package.  Run the binary!
+    """
     name: str = typer.prompt(
         "What's your name?",
     )

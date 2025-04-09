@@ -26,9 +26,8 @@ be built using the included shell script:
 ```
 The file produced should be fairly small:
 ```bash
-cd dist/
-du -sh portable_cli 
-# 724K    portable_cli
+du -sh dist/portable_cli
+# 18M    dist/portable_cli
 ```
 
 ## Interaction
@@ -36,6 +35,7 @@ du -sh portable_cli
 Once built, copy the file from `dist/portable_cli` to 
 a computer with Python 3.8+ .
 
+<!--
 ## Building binaries
 To build a binary, run:
 ```bash
@@ -47,3 +47,4 @@ Based on:
 * https://github.com/hynek/doc2dash
 * https://hynek.me/til/python-portable-binaries/
 * https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_packaging_python_executable.html
+-->
