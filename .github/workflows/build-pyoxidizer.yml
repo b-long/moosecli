@@ -3,8 +3,10 @@ name: Build binaries using pyOxidizer
 
 on:
   push:
+    branches: [main-pyoxidizer]
   pull_request:
-
+    branches: [main-pyoxidizer]
+  workflow_dispatch:
 
 env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
